@@ -1,0 +1,2 @@
+rootProject.name = "BinahOverFlow"
+include ':app'

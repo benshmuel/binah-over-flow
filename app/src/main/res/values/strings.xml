@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">BinahOverFlow</string>
 
-    <string name="results">Showing %s results</string>
+    <string name="results">Showing %s \nresults</string>
 </resources>

@@ -11,15 +11,8 @@ import com.example.binahoverflow.data.QuestionAdapterItem
 import com.example.binahoverflow.databinding.AdapterQuestionItemViewBinding
 import com.example.binahoverflow.ui.fragment.BinahListFragment
 
-class binahAdapter(val onAdapterItemClicked: BinahListFragment.OnAdapterItemClicked) :
-    ListAdapter<BinahAdapterItem, RecyclerView.ViewHolder>(BinahAdapterDiffCallBack()) {
-
-    companion object BinahAdapterViewType {
-
-        const val VIEW_TYPE_QUESTION = 111
-        const val VIEW_TYPE_ANSWER = 222
-        const val NO_RESULTS = 999
-    }
+class BinahAdapter(val onAdapterItemClicked: BinahListFragment.OnAdapterItemClicked) :
+    ListAdapter<BinahAdapterItem, RecyclerView.ViewHolder>(AdapterDiffCallBack()) {
 
 
     interface OnItemClicked {
@@ -27,39 +20,21 @@ class binahAdapter(val onAdapterItemClicked: BinahListFragment.OnAdapterItemClic
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-
         val layoutInflater = LayoutInflater.from(parent.context)
-        return when (viewType) {
-            VIEW_TYPE_QUESTION -> {
-                QuestionViewHolder(
-                    AdapterQuestionItemViewBinding.inflate(
-                        layoutInflater,
-                        parent,
-                        false
-                    )
-                )
-            }
-/*            VIEW_TYPE_ANSWER -> {
-            }
-            NO_RESULTS -> {
-            }*/
-            else -> throw Exception("The viewTpe : $viewType  is not valid")
-        }
 
+        return QuestionViewHolder(
+            AdapterQuestionItemViewBinding.inflate(
+                layoutInflater,
+                parent,
+                false
+            )
+        )
     }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is QuestionViewHolder -> holder.bind(getItem(position) as QuestionAdapterItem)
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is QuestionAdapterItem -> VIEW_TYPE_QUESTION
-            else -> -1
         }
     }
 
@@ -67,6 +42,7 @@ class binahAdapter(val onAdapterItemClicked: BinahListFragment.OnAdapterItemClic
     inner class QuestionViewHolder(private val binding: AdapterQuestionItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(questionAdapterItem: QuestionAdapterItem) {
+
             //Using DataBinding in order to set the obj into XML.
             binding.question = questionAdapterItem
 
@@ -74,36 +50,24 @@ class binahAdapter(val onAdapterItemClicked: BinahListFragment.OnAdapterItemClic
             Glide.with(itemView.context).load(questionAdapterItem.getItemOwnerImgUrl())
                 .into(binding.questionOwnerProfileUrlImg)
 
-
+            //Setting the onClick which will eventually lead to WebView.
             binding.root.setOnClickListener {
                 onAdapterItemClicked.goToWebView(questionAdapterItem.getQuestionUrl())
             }
         }
     }
-
-/*    inner class AnswerViewHolder(private val binding: AdapterQuestionItemViewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
-
-    inner class NoResultViewHolder(private val binding: AdapterQuestionItemViewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }*/
-
 }
 
-
 /**
+ * DiffUtil in order to increase performance while filtering etc.
  *
  * */
-class BinahAdapterDiffCallBack : DiffUtil.ItemCallback<BinahAdapterItem>() {
+class AdapterDiffCallBack : DiffUtil.ItemCallback<BinahAdapterItem>() {
     override fun areItemsTheSame(oldItem: BinahAdapterItem, newItem: BinahAdapterItem): Boolean {
-
         return oldItem.getItemIdentifier() == newItem.getItemIdentifier()
     }
 
     override fun areContentsTheSame(oldItem: BinahAdapterItem, newItem: BinahAdapterItem): Boolean {
         return oldItem.getItemTitle() == newItem.getItemTitle()
     }
-
-
 }

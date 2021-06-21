@@ -17,6 +17,15 @@
         app:navGraph="@navigation/bina_over_flow_nav_graph" />
 
 
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+    </ProgressBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

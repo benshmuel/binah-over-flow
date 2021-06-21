@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bina_over_flow_nav_graph"
+    app:startDestination="@id/binahQuestionsFragment">
+
+    <fragment
+        android:id="@+id/binahQuestionsFragment"
+        android:name="com.example.binahoverflow.ui.fragment.BinahListFragment"
+        android:label="BinahQuestionsFragment" >
+        <action
+            android:id="@+id/action_binahQuestionsFragment_to_binahWebViewFragment"
+            app:destination="@id/binahWebViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/binahWebViewFragment"
+        android:name="com.example.binahoverflow.ui.fragment.BinahWebViewFragment"
+        android:label="BinahWebViewFragment" />
+
+
+</navigation>

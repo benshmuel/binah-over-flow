@@ -65,7 +65,6 @@ class BinahListFragment : Fragment() {
             binahAdapter.submitList(it)
             //Just a simple count title.
             binding.resultCounter.text = resources.getString(R.string.results, it.size.toString())
-        }.also {
             //Turning off the loader.
             mActivityRef.handleLoaderAnimation(View.GONE)
         }

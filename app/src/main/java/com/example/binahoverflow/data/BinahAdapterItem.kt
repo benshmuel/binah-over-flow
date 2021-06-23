@@ -13,5 +13,10 @@ interface BinahAdapterItem {
 
 
 interface QuestionAdapterItem : BinahAdapterItem {
+    companion object {
+        const val ANSWERED = "Answered"
+        const val NOT_ANSWERED = "Not answered"
+    }
+
     fun isQuestionAnswered(): Boolean
 }

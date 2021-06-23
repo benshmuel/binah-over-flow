@@ -97,5 +97,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.65" />
+
+        <TextView
+            android:id="@+id/isAnswered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{question.questionAnswered? question.ANSWERED: question.NOT_ANSWERED}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Placeholder">
+
+        </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

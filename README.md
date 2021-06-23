@@ -26,6 +26,5 @@ The ViewModel will handle api calls and caching (simple object cache) from `Ques
 
 * dataBinding & viewBinding
 
-
-
+* Testing with Espresso: Din't have the chance to complete this section of the task, there is a test that i added, but im not sure about it.
 
